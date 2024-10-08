@@ -1,5 +1,3 @@
-"use client"
-
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -8,6 +6,8 @@ import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Clock, Calendar, Users, Monitor, Projector, Fan, Snowflake, AlertCircle } from 'lucide-react'
 import { labList, classList, eventsList } from '@/lib/data'
+
+
 
 export default function Dashboard() {
   const [currentTime, setCurrentTime] = useState(new Date())
@@ -156,7 +156,7 @@ export default function Dashboard() {
                   <Progress value={(labStats.working / labStats.total) * 100} />
                 </div>
                 {labList.map(lab => (
-                  <Card key={lab.name} className="text-comp border-comp">
+                  <Card key={lab.name} className="text-comp ">
                     <CardHeader>
                       <CardTitle className="flex items-center">
                         {hasIssues(lab) && <AlertCircle className="w-5 h-5 text-red-500 mr-2" />}
@@ -204,7 +204,7 @@ export default function Dashboard() {
                   <Progress value={(classroomStats.working / classroomStats.total) * 100} />
                 </div>
                 {classList.map(classroom => (
-                  <Card key={classroom.name} className="text-comp border-comp">
+                  <Card key={classroom.name} className="text-comp ">
                     <CardHeader>
                       <CardTitle>Classroom {classroom.name}</CardTitle>
                     </CardHeader>
@@ -246,7 +246,7 @@ export default function Dashboard() {
             <CardContent className="text-comp">
               <div className="space-y-4 text-comp">
                 {upcomingEvents.map(event => (
-                  <Card key={event.name} className="text-comp border-comp" >
+                  <Card key={event.name} className="text-comp " >
                     <CardHeader>
                       <CardTitle>{event.name}</CardTitle>
                     </CardHeader>

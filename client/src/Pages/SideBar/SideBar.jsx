@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { LifeBuoy, LogOut, Settings, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { FaComputer } from 'react-icons/fa6'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,11 +11,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-
-import DashboardIcon from '@mui/icons-material/Dashboard'
 import COMP_LOGO from '@/assets/COMP_LOGO.png'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import GroupIcon from '@mui/icons-material/Group'
 import ChatIcon from '@mui/icons-material/Chat'
 import ComputerIcon from '@mui/icons-material/Computer'
 import EventIcon from '@mui/icons-material/Event'
@@ -31,23 +27,15 @@ const SideBarOptions = [
   { name: 'Lab Incharges', icon: <Person />, link: '/lab-incharges' },
   { name: 'Messages', icon: <ChatIcon />,link:"/messages" },
   
-  // {name:"GroupChat",icon:<QuestionAnswerIcon />,link:"/group-chat"},
-
-  // {name:"Google Map",icon:<AddLocationAltIcon />,link:"/maps"},
-  // {name:"Quiz",icon:<QuizIcon  />,link:"/quiz"}
 ]
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '@/Redux/Reducers/authSlice'
-import { useGetFriendsListQuery } from '@/RTK/api'
 import { Person } from '@mui/icons-material'
 
 const SideBar = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
 
   const { user } = useSelector((state) => state.auth)
-  // console.log(user?.friends);
-
-  // console.log(friendsData?.friendNames);
 
   const dispatch = useDispatch()
   const handleLogout = () => {
@@ -135,7 +123,7 @@ const SideBar = ({ children }) => {
         id="logo-sidebar"
         className={`fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
+        } bg-white border-r border-comp sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto flex flex-col justify-between bg-white dark:bg-gray-800">
