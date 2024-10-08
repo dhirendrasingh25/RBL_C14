@@ -1,14 +1,14 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Loader } from './components/Loader'
 import SideBar from './Pages/SideBar/SideBar'
 import PageNotFound from './404/PageNotFound'
 import Classroom from './Pages/Classrooms/Classroom'
 import Events from './Pages/Events/Events'
+import DashBoard from './Pages/DashBoard/DashBoard'
+import Landing from './Pages/Landing/Landing'
+import Labs from './Pages/Labs/Labs'
 
-const DashBoard = lazy(() => import('./Pages/DashBoard/DashBoard'))
-const Landing = lazy(() => import('./Pages/Landing/Landing'))
-const Labs = lazy(() => import('./Pages/Labs/Labs'))
 
 function App() {
   // const storedUser = JSON.parse(localStorage.getItem("user"));

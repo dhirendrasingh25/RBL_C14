@@ -312,3 +312,69 @@ export const classList = [
     ],
   },
 ]
+
+export const labInchargeList = [
+  {
+    name: 'Chetan',
+    email: 'chetan@gmail.com',
+    allotedLabs: ['304', '305', '306', '307', '324', '325', '326'],
+    phone: '1234567890',
+    photo: './profilePic.png',
+    designation: 'Junior Lab Incharge',
+  },
+  {
+    name: 'Priyanka',
+    email: 'Priyanka@gmail.com',
+    allotedLabs: ['304', '305', '306', '307', '324', '325', '326'],
+    phone: '1234567890',
+    photo: './profilePic.png',
+    designation: 'Senior Lab Incharge',
+  },
+  {
+    name: 'Vichare',
+    email: 'vichare@gmail.com',
+    allotedLabs: ['304', '305', '306', '307', '324', '325', '326'],
+    phone: '1234567890',
+    photo: './profilePic.png',
+    designation: 'Senior Lab Incharge',
+  },
+]
+
+export const eventsList = [
+  {
+    name: 'Accenture Test',
+    day: 'Tuesday',
+    date: '20-06-2021',
+    start_time: '10:00 AM',
+    end_time: '12:00 PM',
+    lab_no: '304',
+    facultyIncharge: 'Lydiya Miss',
+    year: 'BE',
+    no_of_students: '30',
+    organized_by: 'TNP cell',
+  },
+  {
+    name: 'Github  Workshop',
+    day: 'Wednesday',
+    date: '20-06-2025',
+    start_time: '10:00 AM',
+    end_time: '12:00 PM',
+    lab_no: '306',
+    facultyIncharge: 'Vikas Singh',
+    year: 'TE',
+    no_of_students: '30',
+    organized_by: 'TSDW',
+  },
+  {
+    name: 'Higher Studies  Workshop',
+    day: 'Thursday',
+    date: '20-06-2024',
+    start_time: '10:00 AM',
+    end_time: '12:00 PM',
+    lab_no: '324',
+    facultyIncharge: 'Shailesh Sir',
+    year: 'TE',
+    no_of_students: '30',
+    organized_by: 'CSI',
+  },
+]

@@ -29,7 +29,7 @@ const SideBarOptions = [
   { name: 'Classrooms', icon: <MeetingRoomIcon />, link: '/classrooms' },
   ,
   { name: 'Messages', icon: <ChatIcon /> },
-  { name: 'Upcoming Events', icon: <EventIcon />, link: '/events' },
+  { name: 'Events', icon: <EventIcon />, link: '/events' },
   // {name:"GroupChat",icon:<QuestionAnswerIcon />,link:"/group-chat"},
 
   // {name:"Google Map",icon:<AddLocationAltIcon />,link:"/maps"},
@@ -143,7 +143,7 @@ const SideBar = ({ children }) => {
                 {
                   <Link to={option.link}>
                     <div
-                      className={`flex items-center p-2 text-[#640D14] rounded-lg text-xl dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${location.pathname === option.link ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
+                      className={`flex items-center p-2 text-[#640D14] rounded-lg text-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${location.pathname === option.link ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
                     >
                       {option.icon}
                       <span className="ms-3">{option.name}</span>
