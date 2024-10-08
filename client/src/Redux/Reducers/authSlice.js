@@ -1,14 +1,14 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { useToast } from "@/components/ui/use-toast";
-import axios from "axios";
-import { server } from "@/main";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { useToast } from '@/components/ui/use-toast'
+import axios from 'axios'
+import { server } from '@/main'
 // const toast = useToast();
 
 const initialState = {
   user: null,
   isAdmin: false,
   loading: true,
-};
+}
 
 // const adminLogin = createAsyncThunk("admin/login", async (secretKey) => {
 //   try {
@@ -43,44 +43,44 @@ const initialState = {
 //   }
 // });
 
-export const getProfileDetails = createAsyncThunk("profile/:id", async (id) => {
+export const getProfileDetails = createAsyncThunk('profile/:id', async (id) => {
   try {
     const { data } = await axios.get(`${server}/api/v1/user/profile/${id}`, {
       withCredentials: true,
-    });
+    })
     // console.log(data);
-    return data.user;
+    return data.user
   } catch (error) {
-    console.log(error);
-    throw error.response.data.message;
+    console.log(error)
+    throw error.response.data.message
   }
-});
+})
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     loginUser: (state, action) => {
-      state.user = action.payload;
-      state.loading = false;
-      localStorage.setItem("user", JSON.stringify(action.payload));
+      state.user = action.payload
+      state.loading = false
+      localStorage.setItem('user', JSON.stringify(action.payload))
     },
     logoutUser: (state) => {
-      state.user = null;
-      state.loading = false;
-      localStorage.removeItem("user");
+      state.user = null
+      state.loading = false
+      localStorage.removeItem('user')
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(getProfileDetails.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload
         // toast.success(action.payload);
       })
       .addCase(getProfileDetails.rejected, (state, action) => {
-        state.user = null;
+        state.user = null
         // toast.error(action.error.message);
-      });
+      })
 
     //       .addCase(getAdmin.rejected, (state, action) => {
     //         state.isAdmin = false;
@@ -94,7 +94,7 @@ const authSlice = createSlice({
     //         toast.error(action.error.message);
     //       });
   },
-});
+})
 
-export default authSlice;
-export const { loginUser, logoutUser } = authSlice.actions;
+export default authSlice
+export const { loginUser, logoutUser } = authSlice.actions

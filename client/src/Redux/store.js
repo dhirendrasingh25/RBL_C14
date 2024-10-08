@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { api } from "@/RTK/api";
-import authSlice from "./Reducers/authSlice";
+import { configureStore } from '@reduxjs/toolkit'
+import { api } from '@/RTK/api'
+import authSlice from './Reducers/authSlice'
 
 export const store = configureStore({
   reducer: {
@@ -9,4 +9,4 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
-});
+})

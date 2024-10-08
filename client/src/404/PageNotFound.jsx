@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 function PageNotFound() {
   return (
@@ -21,7 +21,7 @@ function PageNotFound() {
         </div>
       </div>
     </main>
-  );
+  )
 }
 
-export default PageNotFound;
+export default PageNotFound

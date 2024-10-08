@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react';
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import LoginIcon from '@mui/icons-material/Login';
-import { set, z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import React, { useEffect } from 'react'
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import LoginIcon from '@mui/icons-material/Login'
+import { set, z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 import {
   Form,
   FormControl,
@@ -17,8 +13,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from '@/components/ui/form'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   Select,
   SelectContent,
@@ -27,54 +23,65 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useToast } from "@/components/ui/use-toast"
-import 'react-toastify/dist/ReactToastify.css';
-import { server } from '@/main';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '@/Redux/Reducers/authSlice';
+} from '@/components/ui/select'
+import { useToast } from '@/components/ui/use-toast'
+import 'react-toastify/dist/ReactToastify.css'
+import { server } from '@/main'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { loginUser } from '@/Redux/Reducers/authSlice'
 const formSchema = z.object({
-  username: z.string().min(2, "Username should have at least 2 characters").max(50, "Username should not exceed 50 characters").optional(),
-  email: z.string().email("Invalid email address"),
-  age: z.string()
-    .refine((val) => {
-      const parsed = parseInt(val, 10);
-      return !isNaN(parsed) && parsed >= 18 && parsed <= 99;
-    }, {
-      message: "Age must be a number and at least 18 and less than 99",
-    }).optional(),
+  username: z
+    .string()
+    .min(2, 'Username should have at least 2 characters')
+    .max(50, 'Username should not exceed 50 characters')
+    .optional(),
+  email: z.string().email('Invalid email address'),
+  age: z
+    .string()
+    .refine(
+      (val) => {
+        const parsed = parseInt(val, 10)
+        return !isNaN(parsed) && parsed >= 18 && parsed <= 99
+      },
+      {
+        message: 'Age must be a number and at least 18 and less than 99',
+      },
+    )
+    .optional(),
   location: z.string().optional(),
-  type: z.enum(["Login", "Signup"]),
-  password: z.string().min(8, "Password should have at least 8 characters").max(50, "Password should not exceed 50 characters"),
-});
+  type: z.enum(['Login', 'Signup']),
+  password: z
+    .string()
+    .min(8, 'Password should have at least 8 characters')
+    .max(50, 'Password should not exceed 50 characters'),
+})
 
 const Auth = () => {
-
   const form1 = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
-      email: "",
-      age: "",
-      location: "",
-      type: "Signup",
-      password: "",
+      username: '',
+      email: '',
+      age: '',
+      location: '',
+      type: 'Signup',
+      password: '',
     },
-  });
+  })
 
   const form2 = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      type: "Login",
-      password: "",
+      email: '',
+      type: 'Login',
+      password: '',
     },
-  });
+  })
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   const { toast } = useToast()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   // const config = {
   //   withCredentials: true,
   //   headers: {
@@ -82,89 +89,94 @@ const Auth = () => {
   //   },
   // };
 
-  const onSubmit = async(values) => {
-    if (values.type === "Signup") {
-      
-     try {
-      await axios.post(`${server}/api/v1/user/new`, {
-        name:values.username,
-        email:values.email, 
-        password:values.password, 
-        age:values.age, 
-        location:values.location},
-        {
-          withCredentials: true,
-
-        }
-      )
-      .then((res) => {
-        toast({
-          title: "Signup Success",
-          variant: "success",
-        })
-        dispatch(loginUser(res.data.user))
-        form1.reset();
-      })
-      .catch((err) => {
-        // console.log(err);
-        toast({
-          variant: "destructive",
-          title: "Signup Failed",
-          description: err.response?.data?.message,
-        })
-        // console.log(err.response?.data?.message);
-      });
-     } catch (error) {
-      console.log(error);
-     }
+  const onSubmit = async (values) => {
+    if (values.type === 'Signup') {
+      try {
+        await axios
+          .post(
+            `${server}/api/v1/user/new`,
+            {
+              name: values.username,
+              email: values.email,
+              password: values.password,
+              age: values.age,
+              location: values.location,
+            },
+            {
+              withCredentials: true,
+            },
+          )
+          .then((res) => {
+            toast({
+              title: 'Signup Success',
+              variant: 'success',
+            })
+            dispatch(loginUser(res.data.user))
+            form1.reset()
+          })
+          .catch((err) => {
+            // console.log(err);
+            toast({
+              variant: 'destructive',
+              title: 'Signup Failed',
+              description: err.response?.data?.message,
+            })
+            // console.log(err.response?.data?.message);
+          })
+      } catch (error) {
+        console.log(error)
+      }
     } else {
       try {
-       await axios.post(`${server}/api/v1/user/login`, 
-        {email:values.email,password:values.password},
-        {
-          withCredentials: true,
-    
-        }
-        )
-        .then((res) => {
-          toast({
-            title: "Login Success",
-            variant: "success",
+        await axios
+          .post(
+            `${server}/api/v1/user/login`,
+            { email: values.email, password: values.password },
+            {
+              withCredentials: true,
+            },
+          )
+          .then((res) => {
+            toast({
+              title: 'Login Success',
+              variant: 'success',
+            })
+            // console.log(res.data);
+            dispatch(loginUser(res.data.user))
+            form2.reset()
           })
-          // console.log(res.data);
-          dispatch(loginUser(res.data.user))
-          form2.reset();
-        })
-        .catch((err) => {
-          // console.log(err);
-          toast({
-            title: "Login Failed",
-            variant: "destructive",
-            description: err.response?.data?.message,
+          .catch((err) => {
+            // console.log(err);
+            toast({
+              title: 'Login Failed',
+              variant: 'destructive',
+              description: err.response?.data?.message,
+            })
+            // console.log(err.response?.data?.message);
           })
-          // console.log(err.response?.data?.message);
-        });
-      }catch (error) {
-        console.log(error);
+      } catch (error) {
+        console.log(error)
       }
-      
     }
-    setOpen(false);
-    
-  };
+    setOpen(false)
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="w-full text-start">
-          <LoginIcon /> <span className='px-2'>Authenticate</span>
+          <LoginIcon /> <span className="px-2">Authenticate</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] py-12 rounded-lg">
         <Tabs defaultValue="Signup" className="w-full h-full">
           <TabsList className="w-full">
-            <TabsTrigger className="w-full" value="Login">Login</TabsTrigger>
-            <TabsTrigger className="w-full" value="Signup">Signup</TabsTrigger>
+            <TabsTrigger className="w-full" value="Login">
+              Login
+            </TabsTrigger>
+            <TabsTrigger className="w-full" value="Signup">
+              Signup
+            </TabsTrigger>
           </TabsList>
           <Form {...form1}>
             <form onSubmit={form1.handleSubmit(onSubmit)} className="space-y-8">
@@ -228,7 +240,10 @@ const Auth = () => {
                     <FormItem>
                       <FormLabel>Location</FormLabel>
                       <FormControl>
-                        <Select value={field.value} onValueChange={field.onChange}>
+                        <Select
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
                           <SelectTrigger className="w-full">
                             <SelectValue placeholder="Select a Location" />
                           </SelectTrigger>
@@ -247,7 +262,9 @@ const Auth = () => {
                     </FormItem>
                   )}
                 />
-                <Button className='w-full my-4' type="submit">Register</Button>
+                <Button className="w-full my-4" type="submit">
+                  Register
+                </Button>
               </TabsContent>
             </form>
           </Form>
@@ -280,14 +297,16 @@ const Auth = () => {
                     </FormItem>
                   )}
                 />
-                <Button className='w-full my-4' type="submit">Login</Button>
+                <Button className="w-full my-4" type="submit">
+                  Login
+                </Button>
               </TabsContent>
             </form>
           </Form>
         </Tabs>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}
 
-export default Auth;
+export default Auth

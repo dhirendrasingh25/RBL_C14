@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 const Protected = ({ children }) => {
-  return children;
-};
+  return children
+}
 
-export default Protected;
+export default Protected
