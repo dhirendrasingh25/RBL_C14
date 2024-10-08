@@ -8,6 +8,7 @@ import Events from './Pages/Events/Events'
 import DashBoard from './Pages/DashBoard/DashBoard'
 import Landing from './Pages/Landing/Landing'
 import Labs from './Pages/Labs/Labs'
+import LabIncharge from './Pages/LabIncharge/LabIncharge'
 
 
 function App() {
@@ -59,6 +60,14 @@ function App() {
               element={
                 <SideBar>
                   <Events />{' '}
+                </SideBar>
+              }
+            />
+            <Route
+              path="/lab-incharges"
+              element={
+                <SideBar>
+                  <LabIncharge/>{' '}
                 </SideBar>
               }
             />

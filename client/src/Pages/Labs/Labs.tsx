@@ -11,7 +11,7 @@ import LiveTvIcon from '@mui/icons-material/LiveTv'
 import { FaFan } from 'react-icons/fa'
 import { TbAirConditioning } from 'react-icons/tb'
 export default function Labs() {
-  const [selectedLab, setSelectedLab] = useState(null)
+  const [selectedLab, setSelectedLab] = useState(labList[0])
 
   return (
     <div className="h-full w-full text-comp">

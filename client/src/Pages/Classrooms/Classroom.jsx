@@ -13,7 +13,7 @@ import { FaFan } from 'react-icons/fa' // Fan icon
 import { TbAirConditioning } from 'react-icons/tb' // Air Conditioning icon
 
 export default function Classroom() {
-  const [selectedClass, setSelectedClass] = useState(null)
+  const [selectedClass, setSelectedClass] = useState(classList[0])
 
   return (
     <div className="h-full w-full text-comp">

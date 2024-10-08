@@ -27,9 +27,10 @@ const SideBarOptions = [
   { name: 'DashBoard', icon: <StackedBarChartIcon />, link: '/dashboard' },
   { name: 'Labs', icon: <ComputerIcon />, link: '/labs' },
   { name: 'Classrooms', icon: <MeetingRoomIcon />, link: '/classrooms' },
-  ,
-  { name: 'Messages', icon: <ChatIcon /> },
   { name: 'Events', icon: <EventIcon />, link: '/events' },
+  { name: 'Lab Incharges', icon: <Person />, link: '/lab-incharges' },
+  { name: 'Messages', icon: <ChatIcon /> },
+  
   // {name:"GroupChat",icon:<QuestionAnswerIcon />,link:"/group-chat"},
 
   // {name:"Google Map",icon:<AddLocationAltIcon />,link:"/maps"},
@@ -38,6 +39,7 @@ const SideBarOptions = [
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '@/Redux/Reducers/authSlice'
 import { useGetFriendsListQuery } from '@/RTK/api'
+import { Person } from '@mui/icons-material'
 
 const SideBar = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)

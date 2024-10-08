@@ -10,8 +10,10 @@ export default function Events() {
 
   const { upcomingEvents, pastEvents } = useMemo(() => {
     const now = new Date()
+    console.log(now);
     return eventsList.reduce((acc, event) => {
       const eventDate = new Date(event.date)
+      
       if (eventDate > now) {
         acc.upcomingEvents.push(event)
       } else {
@@ -25,20 +27,20 @@ export default function Events() {
 
   return (
     <div className="container mx-auto p-4 text-comp">
-<div className="flex justify-center w-full space-x-4 mb-6">
-  <Button
-    onClick={() => setShowUpcoming(true)}
-    className={showUpcoming ? "bg-comp text-white w-full border border-comp" : "bg-white w-full border border-comp hover:bg-comp hover:text-white text-comp font-semibold"}
-  >
-    Upcoming Events
-  </Button>
-  <Button
-    onClick={() => setShowUpcoming(false)}
-    className={!showUpcoming ? "bg-comp text-white w-full border border-comp" : "bg-white w-full border border-comp hover:bg-comp hover:text-white text-comp font-semibold"}
-  >
-    Past Events
-  </Button>
-</div>
+      <div className="flex justify-center w-full space-x-4 mb-6">
+        <Button
+          onClick={() => setShowUpcoming(true)}
+          className={showUpcoming ? "bg-comp text-white w-full border border-comp" : "bg-white w-full border border-comp hover:bg-comp hover:text-white text-comp font-semibold"}
+        >
+          Upcoming Events
+        </Button>
+        <Button
+          onClick={() => setShowUpcoming(false)}
+          className={!showUpcoming ? "bg-comp text-white w-full border border-comp" : "bg-white w-full border border-comp hover:bg-comp hover:text-white text-comp font-semibold"}
+        >
+          Past Events
+        </Button>
+      </div>
 
       <h2 className="text-2xl font-bold mb-4 text-center">
         {showUpcoming ? "Upcoming Events" : "Past Events"}
@@ -52,7 +54,7 @@ export default function Events() {
         </Alert>
       ) : (
         displayEvents.map((event, id) => (
-          <Alert key={id} className="mt-4">
+          <Alert key={id} className="mt-4 border border-comp">
             <Calendar className="h-4 w-4 mr-2" />
             <AlertTitle>{event.name}</AlertTitle>
             <AlertDescription>
