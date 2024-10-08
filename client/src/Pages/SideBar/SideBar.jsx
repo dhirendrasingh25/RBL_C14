@@ -29,7 +29,7 @@ const SideBarOptions = [
   { name: 'Classrooms', icon: <MeetingRoomIcon />, link: '/classrooms' },
   { name: 'Events', icon: <EventIcon />, link: '/events' },
   { name: 'Lab Incharges', icon: <Person />, link: '/lab-incharges' },
-  { name: 'Messages', icon: <ChatIcon /> },
+  { name: 'Messages', icon: <ChatIcon />,link:"/messages" },
   
   // {name:"GroupChat",icon:<QuestionAnswerIcon />,link:"/group-chat"},
 

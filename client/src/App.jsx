@@ -9,6 +9,7 @@ import DashBoard from './Pages/DashBoard/DashBoard'
 import Landing from './Pages/Landing/Landing'
 import Labs from './Pages/Labs/Labs'
 import LabIncharge from './Pages/LabIncharge/LabIncharge'
+import Chat from './Pages/Chat/Chat'
 
 
 function App() {
@@ -68,6 +69,14 @@ function App() {
               element={
                 <SideBar>
                   <LabIncharge/>{' '}
+                </SideBar>
+              }
+            />
+            <Route
+              path="/messages"
+              element={
+                <SideBar>
+                  <Chat/>{' '}
                 </SideBar>
               }
             />
