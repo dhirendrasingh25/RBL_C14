@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
-import { Calendar, Clock, Plus, Trash2 } from "lucide-react"
+import { Calendar, Clock, Plus, Trash2, Edit } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -12,18 +12,8 @@ export default function Events() {
   const [showUpcoming, setShowUpcoming] = useState(true)
   const [events, setEvents] = useState(eventsList)
   const [isAddEventOpen, setIsAddEventOpen] = useState(false)
-  const [newEvent, setNewEvent] = useState({
-    name: '',
-    date: '',
-    day: '',
-    start_time: '',
-    end_time: '',
-    lab_no: '',
-    facultyIncharge: '',
-    year: '',
-    no_of_students: '',
-    organized_by: ''
-  })
+  const [isEditEventOpen, setIsEditEventOpen] = useState(false)
+  const [currentEvent, setCurrentEvent] = useState(null)
   const [deleteConfirmation, setDeleteConfirmation] = useState({ isOpen: false, eventId: null })
 
   const { upcomingEvents, pastEvents } = useMemo(() => {
@@ -42,26 +32,26 @@ export default function Events() {
   const displayEvents = showUpcoming ? upcomingEvents : pastEvents
 
   const handleAddEvent = () => {
-    const newEventWithId = { ...newEvent, id: Date.now() }
+    const newEventWithId = { ...currentEvent, id: Date.now() }
     setEvents([...events, newEventWithId])
-    setNewEvent({
-      name: '',
-      date: '',
-      day: '',
-      start_time: '',
-      end_time: '',
-      lab_no: '',
-      facultyIncharge: '',
-      year: '',
-      no_of_students: '',
-      organized_by: ''
-    })
+    setCurrentEvent(null)
     setIsAddEventOpen(false)
+  }
+
+  const handleEditEvent = () => {
+    setEvents(events.map(event => event.id === currentEvent.id ? currentEvent : event))
+    setCurrentEvent(null)
+    setIsEditEventOpen(false)
   }
 
   const handleDeleteEvent = (id) => {
     setEvents(events.filter(event => event.id !== id))
     setDeleteConfirmation({ isOpen: false, eventId: null })
+  }
+
+  const openEditDialog = (event) => {
+    setCurrentEvent(event)
+    setIsEditEventOpen(true)
   }
 
   return (
@@ -81,7 +71,18 @@ export default function Events() {
         </Button>
         <Dialog open={isAddEventOpen} onOpenChange={setIsAddEventOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-comp text-white w-full sm:w-auto">
+            <Button className="bg-comp text-white w-full sm:w-auto" onClick={() => setCurrentEvent({
+              name: '',
+              date: '',
+              day: '',
+              start_time: '',
+              end_time: '',
+              lab_no: '',
+              facultyIncharge: '',
+              year: '',
+              no_of_students: '',
+              organized_by: ''
+            })}>
               <Plus className="mr-2 h-4 w-4" /> Add Event
             </Button>
           </DialogTrigger>
@@ -89,122 +90,7 @@ export default function Events() {
             <DialogHeader>
               <DialogTitle>Add New Event</DialogTitle>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Name
-                </Label>
-                <Input
-                  id="name"
-                  value={newEvent.name}
-                  onChange={(e) => setNewEvent({ ...newEvent, name: e.target.value })}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="date" className="text-right">
-                  Date
-                </Label>
-                <Input
-                  id="date"
-                  type="date"
-                  value={newEvent.date}
-                  onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="day" className="text-right">
-                  Day
-                </Label>
-                <Input
-                  id="day"
-                  value={newEvent.day}
-                  onChange={(e) => setNewEvent({ ...newEvent, day: e.target.value })}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="start_time" className="text-right">
-                  Start Time
-                </Label>
-                <Input
-                  id="start_time"
-                  type="time"
-                  value={newEvent.start_time}
-                  onChange={(e) => setNewEvent({ ...newEvent, start_time: e.target.value })}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="end_time" className="text-right">
-                  End Time
-                </Label>
-                <Input
-                  id="end_time"
-                  type="time"
-                  value={newEvent.end_time}
-                  onChange={(e) => setNewEvent({ ...newEvent, end_time: e.target.value })}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="lab_no" className="text-right">
-                  Lab No
-                </Label>
-                <Input
-                  id="lab_no"
-                  value={newEvent.lab_no}
-                  onChange={(e) => setNewEvent({ ...newEvent, lab_no: e.target.value })}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="facultyIncharge" className="text-right">
-                  Faculty In-charge
-                </Label>
-                <Input
-                  id="facultyIncharge"
-                  value={newEvent.facultyIncharge}
-                  onChange={(e) => setNewEvent({ ...newEvent, facultyIncharge: e.target.value })}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="year" className="text-right">
-                  Year
-                </Label>
-                <Input
-                  id="year"
-                  value={newEvent.year}
-                  onChange={(e) => setNewEvent({ ...newEvent, year: e.target.value })}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="no_of_students" className="text-right">
-                  Number of Students
-                </Label>
-                <Input
-                  id="no_of_students"
-                  type="number"
-                  value={newEvent.no_of_students}
-                  onChange={(e) => setNewEvent({ ...newEvent, no_of_students: e.target.value })}
-                  className="col-span-3"
-                />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="organized_by" className="text-right">
-                  Organized by
-                </Label>
-                <Input
-                  id="organized_by"
-                  value={newEvent.organized_by}
-                  onChange={(e) => setNewEvent({ ...newEvent, organized_by: e.target.value })}
-                  className="col-span-3"
-                />
-              </div>
-            </div>
+            <EventForm event={currentEvent} setEvent={setCurrentEvent} />
             <DialogFooter>
               <Button type="submit" onClick={handleAddEvent} className="bg-comp text-white">Add Event</Button>
             </DialogFooter>
@@ -241,18 +127,40 @@ export default function Events() {
                   <p><strong>Organized by:</strong> {event.organized_by}</p>
                 </AlertDescription>
               </div>
-              <Button
-                onClick={() => setDeleteConfirmation({ isOpen: true, eventId: event.id })}
-                variant="destructive"
-                size="sm"
-                className="bg-red-500 hover:bg-red-600 text-white"
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Button
+                  onClick={() => openEditDialog(event)}
+                  variant="outline"
+                  size="sm"
+                  className="bg-blue-500 hover:bg-blue-600 text-white"
+                >
+                  <Edit className="h-4 w-4" />
+                </Button>
+                <Button
+                  onClick={() => setDeleteConfirmation({ isOpen: true, eventId: event.id })}
+                  variant="destructive"
+                  size="sm"
+                  className="bg-red-500 hover:bg-red-600 text-white"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </Alert>
         ))
       )}
+
+      <Dialog open={isEditEventOpen} onOpenChange={setIsEditEventOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit Event</DialogTitle>
+          </DialogHeader>
+          <EventForm event={currentEvent} setEvent={setCurrentEvent} />
+          <DialogFooter>
+            <Button type="submit" onClick={handleEditEvent} className="bg-comp text-white">Save Changes</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={deleteConfirmation.isOpen} onOpenChange={(isOpen) => setDeleteConfirmation({ ...deleteConfirmation, isOpen })}>
         <DialogContent>
@@ -266,6 +174,127 @@ export default function Events() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+    </div>
+  )
+}
+
+function EventForm({ event, setEvent }) {
+  return (
+    <div className="grid gap-4 py-4">
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="name" className="text-right">
+          Name
+        </Label>
+        <Input
+          id="name"
+          value={event.name}
+          onChange={(e) => setEvent({ ...event, name: e.target.value })}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="date" className="text-right">
+          Date
+        </Label>
+        <Input
+          id="date"
+          type="date"
+          value={event.date}
+          onChange={(e) => setEvent({ ...event, date: e.target.value })}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="day" className="text-right">
+          Day
+        </Label>
+        <Input
+          id="day"
+          value={event.day}
+          onChange={(e) => setEvent({ ...event, day: e.target.value })}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="start_time" className="text-right">
+          Start Time
+        </Label>
+        <Input
+          id="start_time"
+          type="time"
+          value={event.start_time}
+          onChange={(e) => setEvent({ ...event, start_time: e.target.value })}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="end_time" className="text-right">
+          End Time
+        </Label>
+        <Input
+          id="end_time"
+          type="time"
+          value={event.end_time}
+          onChange={(e) => setEvent({ ...event, end_time: e.target.value })}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="lab_no" className="text-right">
+          Lab No
+        </Label>
+        <Input
+          id="lab_no"
+          value={event.lab_no}
+          onChange={(e) => setEvent({ ...event, lab_no: e.target.value })}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="facultyIncharge" className="text-right">
+          Faculty In-charge
+        </Label>
+        <Input
+          id="facultyIncharge"
+          value={event.facultyIncharge}
+          onChange={(e) => setEvent({ ...event, facultyIncharge: e.target.value })}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="year" className="text-right">
+          Year
+        </Label>
+        <Input
+          id="year"
+          value={event.year}
+          onChange={(e) => setEvent({ ...event, year: e.target.value })}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="no_of_students" className="text-right">
+          Number of Students
+        </Label>
+        <Input
+          id="no_of_students"
+          type="number"
+          value={event.no_of_students}
+          onChange={(e) => setEvent({ ...event, no_of_students: e.target.value })}
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="organized_by" className="text-right">
+          Organized by
+        </Label>
+        <Input
+          id="organized_by"
+          value={event.organized_by}
+          onChange={(e) => setEvent({ ...event, organized_by: e.target.value })}
+          className="col-span-3"
+        />
+      </div>
     </div>
   )
 }
