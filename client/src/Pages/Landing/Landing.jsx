@@ -45,17 +45,17 @@ const Landing = () => {
   }
 
   return (
-    <div className="h-full">
+    <div className="h-full text-comp">
       <AuroraBackground>
-        <div className="flex items-start justify-center mt-10 ">
+        <div className="flex items-start justify-center">
           <img src={COMP_HEADER} alt="COMP_HEADER" className="" />
         </div>
         <div className="flex z-50 items-center h-full w-full justify-center">
-          <Card className="">
+          <Card className="text-comp ">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold text-center">
                 {' '}
-                Welcome to Resource Allocation System!
+                Welcome to Resource Optimization System!
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -93,7 +93,7 @@ const Landing = () => {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                  className="w-full bg-comp text-white"
                 >
                   Authenticate
                 </Button>

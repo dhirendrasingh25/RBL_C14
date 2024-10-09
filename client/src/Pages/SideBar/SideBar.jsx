@@ -85,19 +85,19 @@ const SideBar = ({ children }) => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-56 mr-2">
-                    <DropdownMenuLabel className="text-[#640D14]">
+                    {/* <DropdownMenuLabel className="text-[#640D14]">
                       My Account
-                    </DropdownMenuLabel>
+                    </DropdownMenuLabel> */}
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                      <DropdownMenuItem>
+                      {/* <DropdownMenuItem>
                         <User className="mr-2 h-4 w-4 text-[#640D14]" />
                         <span className="text-[#640D14]">Profile</span>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
                         <Settings className="mr-2 h-4 w-4 text-[#640D14]" />
                         <span className="text-[#640D14]">Settings</span>
-                      </DropdownMenuItem>
+                      </DropdownMenuItem> */}
                     </DropdownMenuGroup>
                     <DropdownMenuItem>
                       <LifeBuoy className="mr-2 h-4 w-4 text-[#640D14]" />

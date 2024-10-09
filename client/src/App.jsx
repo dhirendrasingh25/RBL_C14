@@ -44,7 +44,7 @@ function App() {
               path="/labs"
               element={
                 <SideBar>
-                  <Labs />{' '}
+                  <Labs/> {' '}
                 </SideBar>
               }
             />
