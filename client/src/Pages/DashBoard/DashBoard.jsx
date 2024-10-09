@@ -26,30 +26,34 @@ export default function Dashboard() {
   }, [currentTime])
 
   const updateAvailability = () => {
-    const currentTime = new Date()
     const currentHour = currentTime.getHours()
     const currentMinute = currentTime.getMinutes()
     const currentTimeString = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`
   
-    const isTimeInRange = (start, end, current) => {
-      return current >= start && current < end
+    const parseTime = (timeString) => {
+      const [time, period] = timeString.split(' ')
+      let [hours, minutes] = time.split(':').map(Number)
+      if (period === 'PM' && hours !== 12) hours += 12
+      if (period === 'AM' && hours === 12) hours = 0
+      return hours * 60 + minutes
     }
   
-    const availableLabs = labList.filter(lab => {
-      const isWithinOperatingHours = isTimeInRange(lab.open_time, lab.close_time, currentTimeString)
-      const isOccupied = lab.timeTable.some(slot => 
-        isTimeInRange(slot.timeSt, slot.timeEnd, currentTimeString)
-      )
-      return !isWithinOperatingHours && !isOccupied
-    })
+    const currentTimeMinutes = parseTime(currentTimeString)
   
-    const availableClassrooms = classList.filter(classroom => {
-      const isWithinOperatingHours = isTimeInRange(classroom.open_time, classroom.close_time, currentTimeString)
-      const isOccupied = classroom.timeTable.some(slot => 
-        isTimeInRange(slot.timeSt, slot.timeEnd, currentTimeString)
+    const isTimeInRange = (start, end, current) => {
+      const startMinutes = parseTime(start)
+      const endMinutes = parseTime(end)
+      return current >= startMinutes && current < endMinutes
+    }
+  
+    const isAvailable = (item) => {
+      return !item.timeTable.some(slot => 
+        isTimeInRange(slot.timeSt, slot.timeEnd, currentTimeMinutes)
       )
-      return !isWithinOperatingHours && !isOccupied
-    })
+    }
+  
+    const availableLabs = labList.filter(isAvailable)
+    const availableClassrooms = classList.filter(isAvailable)
   
     setAvailableLabs(availableLabs)
     setAvailableClassrooms(availableClassrooms)
@@ -156,7 +160,7 @@ export default function Dashboard() {
                   <Progress value={(labStats.working / labStats.total) * 100} />
                 </div>
                 {labList.map(lab => (
-                  <Card key={lab.name} className="text-comp ">
+                  <Card key={lab.name} className="text-comp border-comp">
                     <CardHeader>
                       <CardTitle className="flex items-center">
                         {hasIssues(lab) && <AlertCircle className="w-5 h-5 text-red-500 mr-2" />}
