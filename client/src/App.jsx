@@ -11,7 +11,6 @@ import Labs from './Pages/Labs/Labs'
 import LabIncharge from './Pages/LabIncharge/LabIncharge'
 import Chat from './Pages/Chat/Chat'
 
-
 function App() {
   // const storedUser = JSON.parse(localStorage.getItem("user"));
   // const userId = storedUser?._id;
@@ -44,7 +43,7 @@ function App() {
               path="/labs"
               element={
                 <SideBar>
-                  <Labs/> {' '}
+                  <Labs />{' '}
                 </SideBar>
               }
             />
@@ -68,7 +67,7 @@ function App() {
               path="/lab-incharges"
               element={
                 <SideBar>
-                  <LabIncharge/>{' '}
+                  <LabIncharge />{' '}
                 </SideBar>
               }
             />
@@ -76,7 +75,7 @@ function App() {
               path="/messages"
               element={
                 <SideBar>
-                  <Chat/>{' '}
+                  <Chat />{' '}
                 </SideBar>
               }
             />

@@ -15,16 +15,16 @@ import {
 import LiveTvIcon from '@mui/icons-material/LiveTv'
 import { FaFan } from 'react-icons/fa'
 import { TbAirConditioning } from 'react-icons/tb'
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
 import {
   Table,
   TableBody,
@@ -32,7 +32,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from '@/components/ui/table'
 
 export default function Labs() {
   const [labs, setLabs] = useState(labList)
@@ -62,25 +62,29 @@ export default function Labs() {
   }
 
   const handleSaveEdit = () => {
-    setLabs(labs.map(lab => lab.name === editingLab.name ? editingLab : lab))
+    setLabs(
+      labs.map((lab) => (lab.name === editingLab.name ? editingLab : lab)),
+    )
     setSelectedLab(editingLab)
     setIsDialogOpen(false)
   }
 
   const handleSaveTimetable = () => {
     const updatedLab = { ...selectedLab, timeTable: editingTimetable }
-    setLabs(labs.map(lab => lab.name === selectedLab.name ? updatedLab : lab))
+    setLabs(
+      labs.map((lab) => (lab.name === selectedLab.name ? updatedLab : lab)),
+    )
     setSelectedLab(updatedLab)
     setIsTimetableDialogOpen(false)
   }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    setEditingLab(prev => ({ ...prev, [name]: value }))
+    setEditingLab((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSwitchChange = (name) => {
-    setEditingLab(prev => ({ ...prev, [name]: !prev[name] }))
+    setEditingLab((prev) => ({ ...prev, [name]: !prev[name] }))
   }
 
   const handleTimetableEntryChange = (index, field, value) => {
@@ -90,7 +94,7 @@ export default function Labs() {
   }
 
   const handleNewTimetableEntryChange = (field, value) => {
-    setNewTimetableEntry(prev => ({ ...prev, [field]: value }))
+    setNewTimetableEntry((prev) => ({ ...prev, [field]: value }))
   }
 
   const handleAddTimetableEntry = () => {
@@ -149,10 +153,16 @@ export default function Labs() {
                 {selectedLab.name} Lab Details
               </h2>
               <div className="flex flex-col md:flex-row gap-2">
-                <Button className="bg-comp w-full md:w-auto" onClick={() => handleEditLab(selectedLab)}>
+                <Button
+                  className="bg-comp w-full md:w-auto"
+                  onClick={() => handleEditLab(selectedLab)}
+                >
                   <Edit className="mr-2 h-4 w-4" /> Edit Details
                 </Button>
-                <Button className="bg-comp w-full md:w-auto" onClick={() => handleEditTimetable(selectedLab)}>
+                <Button
+                  className="bg-comp w-full md:w-auto"
+                  onClick={() => handleEditTimetable(selectedLab)}
+                >
                   <Edit className="mr-2 h-4 w-4" /> Edit Timetable
                 </Button>
               </div>
@@ -198,9 +208,7 @@ export default function Labs() {
                       <ComputerOutlined />
                     </div>
                     <div className="text-sm md:text-lg">
-                      <span className="font-semibold">
-                        Working Computers:{' '}
-                      </span>
+                      <span className="font-semibold">Working Computers: </span>
                       {selectedLab.no_of_Computers_working}
                     </div>
                   </div>
@@ -265,19 +273,35 @@ export default function Labs() {
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="whitespace-nowrap">Subject</TableHead>
-                          <TableHead className="whitespace-nowrap">Time</TableHead>
-                          <TableHead className="whitespace-nowrap">Faculty</TableHead>
-                          <TableHead className="whitespace-nowrap">Year & Class</TableHead>
+                          <TableHead className="whitespace-nowrap">
+                            Subject
+                          </TableHead>
+                          <TableHead className="whitespace-nowrap">
+                            Time
+                          </TableHead>
+                          <TableHead className="whitespace-nowrap">
+                            Faculty
+                          </TableHead>
+                          <TableHead className="whitespace-nowrap">
+                            Year & Class
+                          </TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         {selectedLab.timeTable.map((slot, index) => (
                           <TableRow key={index}>
-                            <TableCell className="whitespace-nowrap">{slot.subject}</TableCell>
-                            <TableCell className="whitespace-nowrap">{slot.timeSt} - {slot.timeEnd}</TableCell>
-                            <TableCell className="whitespace-nowrap">{slot.facultyIncharge1}, {slot.facultyIncharge2}</TableCell>
-                            <TableCell className="whitespace-nowrap">{slot.year}, Class: {slot.class}</TableCell>
+                            <TableCell className="whitespace-nowrap">
+                              {slot.subject}
+                            </TableCell>
+                            <TableCell className="whitespace-nowrap">
+                              {slot.timeSt} - {slot.timeEnd}
+                            </TableCell>
+                            <TableCell className="whitespace-nowrap">
+                              {slot.facultyIncharge1}, {slot.facultyIncharge2}
+                            </TableCell>
+                            <TableCell className="whitespace-nowrap">
+                              {slot.year}, Class: {slot.class}
+                            </TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -338,7 +362,6 @@ export default function Labs() {
               </Label>
               <Input
                 id="no_of_Computers_working"
-                
                 name="no_of_Computers_working"
                 value={editingLab?.no_of_Computers_working}
                 onChange={handleInputChange}
@@ -365,9 +388,13 @@ export default function Labs() {
               <Switch
                 id="air_conditioner_working"
                 checked={editingLab?.air_conditioner_working}
-                onCheckedChange={() => handleSwitchChange('air_conditioner_working')}
+                onCheckedChange={() =>
+                  handleSwitchChange('air_conditioner_working')
+                }
               />
-              <Label htmlFor="air_conditioner_working">Air Conditioner Working</Label>
+              <Label htmlFor="air_conditioner_working">
+                Air Conditioner Working
+              </Label>
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="open_time" className="text-right">
@@ -398,7 +425,10 @@ export default function Labs() {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={isTimetableDialogOpen} onOpenChange={setIsTimetableDialogOpen}>
+      <Dialog
+        open={isTimetableDialogOpen}
+        onOpenChange={setIsTimetableDialogOpen}
+      >
         <DialogContent className="w-full max-w-[95vw] md:max-w-[800px]">
           <DialogHeader>
             <DialogTitle className=" text-comp">Edit Timetable</DialogTitle>
@@ -408,7 +438,9 @@ export default function Labs() {
               <TableHeader>
                 <TableRow>
                   <TableHead className="whitespace-nowrap">Subject</TableHead>
-                  <TableHead className="whitespace-nowrap">Time Start</TableHead>
+                  <TableHead className="whitespace-nowrap">
+                    Time Start
+                  </TableHead>
                   <TableHead className="whitespace-nowrap">Time End</TableHead>
                   <TableHead className="whitespace-nowrap">Faculty 1</TableHead>
                   <TableHead className="whitespace-nowrap">Faculty 2</TableHead>
@@ -423,47 +455,92 @@ export default function Labs() {
                     <TableCell>
                       <Input
                         value={entry.subject}
-                        onChange={(e) => handleTimetableEntryChange(index, 'subject', e.target.value)}
+                        onChange={(e) =>
+                          handleTimetableEntryChange(
+                            index,
+                            'subject',
+                            e.target.value,
+                          )
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
                         value={entry.timeSt}
-                        onChange={(e) => handleTimetableEntryChange(index, 'timeSt', e.target.value)}
+                        onChange={(e) =>
+                          handleTimetableEntryChange(
+                            index,
+                            'timeSt',
+                            e.target.value,
+                          )
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
                         value={entry.timeEnd}
-                        onChange={(e) => handleTimetableEntryChange(index, 'timeEnd', e.target.value)}
+                        onChange={(e) =>
+                          handleTimetableEntryChange(
+                            index,
+                            'timeEnd',
+                            e.target.value,
+                          )
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
                         value={entry.facultyIncharge1}
-                        onChange={(e) => handleTimetableEntryChange(index, 'facultyIncharge1', e.target.value)}
+                        onChange={(e) =>
+                          handleTimetableEntryChange(
+                            index,
+                            'facultyIncharge1',
+                            e.target.value,
+                          )
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
                         value={entry.facultyIncharge2}
-                        onChange={(e) => handleTimetableEntryChange(index, 'facultyIncharge2', e.target.value)}
+                        onChange={(e) =>
+                          handleTimetableEntryChange(
+                            index,
+                            'facultyIncharge2',
+                            e.target.value,
+                          )
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
                         value={entry.year}
-                        onChange={(e) => handleTimetableEntryChange(index, 'year', e.target.value)}
+                        onChange={(e) =>
+                          handleTimetableEntryChange(
+                            index,
+                            'year',
+                            e.target.value,
+                          )
+                        }
                       />
                     </TableCell>
                     <TableCell>
                       <Input
                         value={entry.class}
-                        onChange={(e) => handleTimetableEntryChange(index, 'class', e.target.value)}
+                        onChange={(e) =>
+                          handleTimetableEntryChange(
+                            index,
+                            'class',
+                            e.target.value,
+                          )
+                        }
                       />
                     </TableCell>
                     <TableCell>
-                      <Button onClick={() => handleRemoveTimetableEntry(index)} variant="destructive">
+                      <Button
+                        onClick={() => handleRemoveTimetableEntry(index)}
+                        variant="destructive"
+                      >
                         <Delete className="h-4 w-4" />
                       </Button>
                     </TableCell>
@@ -477,45 +554,70 @@ export default function Labs() {
                 <Input
                   placeholder="Subject"
                   value={newTimetableEntry.subject}
-                  onChange={(e) => handleNewTimetableEntryChange('subject', e.target.value)}
+                  onChange={(e) =>
+                    handleNewTimetableEntryChange('subject', e.target.value)
+                  }
                 />
                 <Input
                   placeholder="Time Start"
                   value={newTimetableEntry.timeSt}
-                  onChange={(e) => handleNewTimetableEntryChange('timeSt', e.target.value)}
+                  onChange={(e) =>
+                    handleNewTimetableEntryChange('timeSt', e.target.value)
+                  }
                 />
                 <Input
                   placeholder="Time End"
                   value={newTimetableEntry.timeEnd}
-                  onChange={(e) => handleNewTimetableEntryChange('timeEnd', e.target.value)}
+                  onChange={(e) =>
+                    handleNewTimetableEntryChange('timeEnd', e.target.value)
+                  }
                 />
                 <Input
                   placeholder="Faculty 1"
                   value={newTimetableEntry.facultyIncharge1}
-                  onChange={(e) => handleNewTimetableEntryChange('facultyIncharge1', e.target.value)}
+                  onChange={(e) =>
+                    handleNewTimetableEntryChange(
+                      'facultyIncharge1',
+                      e.target.value,
+                    )
+                  }
                 />
                 <Input
                   placeholder="Faculty 2"
                   value={newTimetableEntry.facultyIncharge2}
-                  onChange={(e) => handleNewTimetableEntryChange('facultyIncharge2', e.target.value)}
+                  onChange={(e) =>
+                    handleNewTimetableEntryChange(
+                      'facultyIncharge2',
+                      e.target.value,
+                    )
+                  }
                 />
                 <Input
                   placeholder="Year"
                   value={newTimetableEntry.year}
-                  onChange={(e) => handleNewTimetableEntryChange('year', e.target.value)}
+                  onChange={(e) =>
+                    handleNewTimetableEntryChange('year', e.target.value)
+                  }
                 />
                 <Input
                   placeholder="Class"
                   value={newTimetableEntry.class}
-                  onChange={(e) => handleNewTimetableEntryChange('class', e.target.value)}
+                  onChange={(e) =>
+                    handleNewTimetableEntryChange('class', e.target.value)
+                  }
                 />
               </div>
-              <Button onClick={handleAddTimetableEntry} className="w-full bg-comp md:w-auto">
+              <Button
+                onClick={handleAddTimetableEntry}
+                className="w-full bg-comp md:w-auto"
+              >
                 <Add className="mr-2 h-4 w-4" /> Add Entry
               </Button>
             </div>
           </div>
-          <Button className="bg-comp" onClick={handleSaveTimetable}>Save Timetable</Button>
+          <Button className="bg-comp" onClick={handleSaveTimetable}>
+            Save Timetable
+          </Button>
         </DialogContent>
       </Dialog>
     </div>

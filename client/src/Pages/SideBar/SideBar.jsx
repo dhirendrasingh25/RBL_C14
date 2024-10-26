@@ -25,8 +25,7 @@ const SideBarOptions = [
   { name: 'Classrooms', icon: <MeetingRoomIcon />, link: '/classrooms' },
   { name: 'Events', icon: <EventIcon />, link: '/events' },
   { name: 'Lab Incharges', icon: <Person />, link: '/lab-incharges' },
-  { name: 'Messages', icon: <ChatIcon />,link:"/messages" },
-  
+  { name: 'Messages', icon: <ChatIcon />, link: '/messages' },
 ]
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '@/Redux/Reducers/authSlice'

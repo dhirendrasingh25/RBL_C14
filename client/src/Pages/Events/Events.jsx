@@ -1,10 +1,17 @@
 import React, { useState, useMemo } from 'react'
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Button } from "@/components/ui/button"
-import { Calendar, Clock, Plus, Trash2, Edit } from "lucide-react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Button } from '@/components/ui/button'
+import { Calendar, Clock, Plus, Trash2, Edit } from 'lucide-react'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 import { eventsList } from '@/lib/data'
 
@@ -14,19 +21,25 @@ export default function Events() {
   const [isAddEventOpen, setIsAddEventOpen] = useState(false)
   const [isEditEventOpen, setIsEditEventOpen] = useState(false)
   const [currentEvent, setCurrentEvent] = useState(null)
-  const [deleteConfirmation, setDeleteConfirmation] = useState({ isOpen: false, eventId: null })
+  const [deleteConfirmation, setDeleteConfirmation] = useState({
+    isOpen: false,
+    eventId: null,
+  })
 
   const { upcomingEvents, pastEvents } = useMemo(() => {
     const now = new Date()
-    return events.reduce((acc, event) => {
-      const eventDate = new Date(event.date)
-      if (eventDate > now) {
-        acc.upcomingEvents.push(event)
-      } else {
-        acc.pastEvents.push(event)
-      }
-      return acc
-    }, { upcomingEvents: [], pastEvents: [] })
+    return events.reduce(
+      (acc, event) => {
+        const eventDate = new Date(event.date)
+        if (eventDate > now) {
+          acc.upcomingEvents.push(event)
+        } else {
+          acc.pastEvents.push(event)
+        }
+        return acc
+      },
+      { upcomingEvents: [], pastEvents: [] },
+    )
   }, [events])
 
   const displayEvents = showUpcoming ? upcomingEvents : pastEvents
@@ -39,13 +52,17 @@ export default function Events() {
   }
 
   const handleEditEvent = () => {
-    setEvents(events.map(event => event.id === currentEvent.id ? currentEvent : event))
+    setEvents(
+      events.map((event) =>
+        event.id === currentEvent.id ? currentEvent : event,
+      ),
+    )
     setCurrentEvent(null)
     setIsEditEventOpen(false)
   }
 
   const handleDeleteEvent = (id) => {
-    setEvents(events.filter(event => event.id !== id))
+    setEvents(events.filter((event) => event.id !== id))
     setDeleteConfirmation({ isOpen: false, eventId: null })
   }
 
@@ -59,30 +76,35 @@ export default function Events() {
       <div className="flex flex-col sm:flex-row justify-center w-full space-y-2 sm:space-y-0 sm:space-x-4 mb-6">
         <Button
           onClick={() => setShowUpcoming(true)}
-          className={`${showUpcoming ? "bg-comp text-white" : "bg-white text-comp hover:bg-comp hover:text-white"} w-full border border-comp font-semibold`}
+          className={`${showUpcoming ? 'bg-comp text-white' : 'bg-white text-comp hover:bg-comp hover:text-white'} w-full border border-comp font-semibold`}
         >
           Upcoming Events
         </Button>
         <Button
           onClick={() => setShowUpcoming(false)}
-          className={`${!showUpcoming ? "bg-comp text-white" : "bg-white text-comp hover:bg-comp hover:text-white"} w-full border border-comp font-semibold`}
+          className={`${!showUpcoming ? 'bg-comp text-white' : 'bg-white text-comp hover:bg-comp hover:text-white'} w-full border border-comp font-semibold`}
         >
           Past Events
         </Button>
         <Dialog open={isAddEventOpen} onOpenChange={setIsAddEventOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-comp text-white w-full sm:w-auto" onClick={() => setCurrentEvent({
-              name: '',
-              date: '',
-              day: '',
-              start_time: '',
-              end_time: '',
-              lab_no: '',
-              facultyIncharge: '',
-              year: '',
-              no_of_students: '',
-              organized_by: ''
-            })}>
+            <Button
+              className="bg-comp text-white w-full sm:w-auto"
+              onClick={() =>
+                setCurrentEvent({
+                  name: '',
+                  date: '',
+                  day: '',
+                  start_time: '',
+                  end_time: '',
+                  lab_no: '',
+                  facultyIncharge: '',
+                  year: '',
+                  no_of_students: '',
+                  organized_by: '',
+                })
+              }
+            >
               <Plus className="mr-2 h-4 w-4" /> Add Event
             </Button>
           </DialogTrigger>
@@ -92,20 +114,27 @@ export default function Events() {
             </DialogHeader>
             <EventForm event={currentEvent} setEvent={setCurrentEvent} />
             <DialogFooter>
-              <Button type="submit" onClick={handleAddEvent} className="bg-comp text-white">Add Event</Button>
+              <Button
+                type="submit"
+                onClick={handleAddEvent}
+                className="bg-comp text-white"
+              >
+                Add Event
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
       </div>
 
       <h2 className="text-2xl font-bold mb-4 text-center">
-        {showUpcoming ? "Upcoming Events" : "Past Events"}
+        {showUpcoming ? 'Upcoming Events' : 'Past Events'}
       </h2>
       {displayEvents.length === 0 ? (
         <Alert>
           <AlertTitle>No events to display</AlertTitle>
           <AlertDescription>
-            There are no {showUpcoming ? "upcoming" : "past"} events at this time.
+            There are no {showUpcoming ? 'upcoming' : 'past'} events at this
+            time.
           </AlertDescription>
         </Alert>
       ) : (
@@ -118,13 +147,27 @@ export default function Events() {
                   <AlertTitle>{event.name}</AlertTitle>
                 </div>
                 <AlertDescription>
-                  <p><strong>Date:</strong> {event.date} ({event.day})</p>
-                  <p><strong>Time:</strong> {event.start_time} - {event.end_time}</p>
-                  <p><strong>Location:</strong> Lab {event.lab_no}</p>
-                  <p><strong>Faculty In-charge:</strong> {event.facultyIncharge}</p>
-                  <p><strong>Year:</strong> {event.year}</p>
-                  <p><strong>Number of Students:</strong> {event.no_of_students}</p>
-                  <p><strong>Organized by:</strong> {event.organized_by}</p>
+                  <p>
+                    <strong>Date:</strong> {event.date} ({event.day})
+                  </p>
+                  <p>
+                    <strong>Time:</strong> {event.start_time} - {event.end_time}
+                  </p>
+                  <p>
+                    <strong>Location:</strong> Lab {event.lab_no}
+                  </p>
+                  <p>
+                    <strong>Faculty In-charge:</strong> {event.facultyIncharge}
+                  </p>
+                  <p>
+                    <strong>Year:</strong> {event.year}
+                  </p>
+                  <p>
+                    <strong>Number of Students:</strong> {event.no_of_students}
+                  </p>
+                  <p>
+                    <strong>Organized by:</strong> {event.organized_by}
+                  </p>
                 </AlertDescription>
               </div>
               <div className="flex flex-col sm:flex-row gap-2">
@@ -137,7 +180,9 @@ export default function Events() {
                   <Edit className="h-4 w-4" />
                 </Button>
                 <Button
-                  onClick={() => setDeleteConfirmation({ isOpen: true, eventId: event.id })}
+                  onClick={() =>
+                    setDeleteConfirmation({ isOpen: true, eventId: event.id })
+                  }
                   variant="destructive"
                   size="sm"
                   className="bg-red-500 hover:bg-red-600 text-white"
@@ -157,20 +202,43 @@ export default function Events() {
           </DialogHeader>
           <EventForm event={currentEvent} setEvent={setCurrentEvent} />
           <DialogFooter>
-            <Button type="submit" onClick={handleEditEvent} className="bg-comp text-white">Save Changes</Button>
+            <Button
+              type="submit"
+              onClick={handleEditEvent}
+              className="bg-comp text-white"
+            >
+              Save Changes
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      <Dialog open={deleteConfirmation.isOpen} onOpenChange={(isOpen) => setDeleteConfirmation({ ...deleteConfirmation, isOpen })}>
+      <Dialog
+        open={deleteConfirmation.isOpen}
+        onOpenChange={(isOpen) =>
+          setDeleteConfirmation({ ...deleteConfirmation, isOpen })
+        }
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Confirm Deletion</DialogTitle>
           </DialogHeader>
           <p>Are you sure you want to delete this event?</p>
           <DialogFooter>
-            <Button onClick={() => setDeleteConfirmation({ isOpen: false, eventId: null })} variant="outline">Cancel</Button>
-            <Button onClick={() => handleDeleteEvent(deleteConfirmation.eventId)} className="bg-red-500 hover:bg-red-600 text-white">Delete</Button>
+            <Button
+              onClick={() =>
+                setDeleteConfirmation({ isOpen: false, eventId: null })
+              }
+              variant="outline"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => handleDeleteEvent(deleteConfirmation.eventId)}
+              className="bg-red-500 hover:bg-red-600 text-white"
+            >
+              Delete
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -257,7 +325,9 @@ function EventForm({ event, setEvent }) {
         <Input
           id="facultyIncharge"
           value={event.facultyIncharge}
-          onChange={(e) => setEvent({ ...event, facultyIncharge: e.target.value })}
+          onChange={(e) =>
+            setEvent({ ...event, facultyIncharge: e.target.value })
+          }
           className="col-span-3"
         />
       </div>
@@ -280,7 +350,9 @@ function EventForm({ event, setEvent }) {
           id="no_of_students"
           type="number"
           value={event.no_of_students}
-          onChange={(e) => setEvent({ ...event, no_of_students: e.target.value })}
+          onChange={(e) =>
+            setEvent({ ...event, no_of_students: e.target.value })
+          }
           className="col-span-3"
         />
       </div>

@@ -91,10 +91,7 @@ const Landing = () => {
                     className="w-full"
                   />
                 </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-comp text-white"
-                >
+                <Button type="submit" className="w-full bg-comp text-white">
                   Authenticate
                 </Button>
               </form>
