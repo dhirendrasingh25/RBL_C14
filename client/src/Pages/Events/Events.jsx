@@ -255,7 +255,7 @@ function EventForm({ event, setEvent }) {
         </Label>
         <Input
           id="name"
-          value={event.name}
+          value={event?.name}
           onChange={(e) => setEvent({ ...event, name: e.target.value })}
           className="col-span-3"
         />
@@ -267,7 +267,7 @@ function EventForm({ event, setEvent }) {
         <Input
           id="date"
           type="date"
-          value={event.date}
+          value={event?.date}
           onChange={(e) => setEvent({ ...event, date: e.target.value })}
           className="col-span-3"
         />
@@ -278,7 +278,7 @@ function EventForm({ event, setEvent }) {
         </Label>
         <Input
           id="day"
-          value={event.day}
+          value={event?.day}
           onChange={(e) => setEvent({ ...event, day: e.target.value })}
           className="col-span-3"
         />
@@ -290,7 +290,7 @@ function EventForm({ event, setEvent }) {
         <Input
           id="start_time"
           type="time"
-          value={event.start_time}
+          value={event?.start_time}
           onChange={(e) => setEvent({ ...event, start_time: e.target.value })}
           className="col-span-3"
         />
@@ -302,7 +302,7 @@ function EventForm({ event, setEvent }) {
         <Input
           id="end_time"
           type="time"
-          value={event.end_time}
+          value={event?.end_time}
           onChange={(e) => setEvent({ ...event, end_time: e.target.value })}
           className="col-span-3"
         />
@@ -313,7 +313,7 @@ function EventForm({ event, setEvent }) {
         </Label>
         <Input
           id="lab_no"
-          value={event.lab_no}
+          value={event?.lab_no}
           onChange={(e) => setEvent({ ...event, lab_no: e.target.value })}
           className="col-span-3"
         />
@@ -324,7 +324,7 @@ function EventForm({ event, setEvent }) {
         </Label>
         <Input
           id="facultyIncharge"
-          value={event.facultyIncharge}
+          value={event?.facultyIncharge}
           onChange={(e) =>
             setEvent({ ...event, facultyIncharge: e.target.value })
           }
@@ -337,7 +337,7 @@ function EventForm({ event, setEvent }) {
         </Label>
         <Input
           id="year"
-          value={event.year}
+          value={event?.year}
           onChange={(e) => setEvent({ ...event, year: e.target.value })}
           className="col-span-3"
         />
@@ -349,7 +349,7 @@ function EventForm({ event, setEvent }) {
         <Input
           id="no_of_students"
           type="number"
-          value={event.no_of_students}
+          value={event?.no_of_students}
           onChange={(e) =>
             setEvent({ ...event, no_of_students: e.target.value })
           }
@@ -362,7 +362,7 @@ function EventForm({ event, setEvent }) {
         </Label>
         <Input
           id="organized_by"
-          value={event.organized_by}
+          value={event?.organized_by}
           onChange={(e) => setEvent({ ...event, organized_by: e.target.value })}
           className="col-span-3"
         />

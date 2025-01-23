@@ -19,6 +19,7 @@ import EventIcon from '@mui/icons-material/Event'
 import StackedBarChartIcon from '@mui/icons-material/StackedBarChart'
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom'
 import { useSelector } from 'react-redux'
+
 const SideBarOptions = [
   { name: 'DashBoard', icon: <StackedBarChartIcon />, link: '/dashboard' },
   { name: 'Labs', icon: <ComputerIcon />, link: '/labs' },
@@ -26,6 +27,7 @@ const SideBarOptions = [
   { name: 'Events', icon: <EventIcon />, link: '/events' },
   { name: 'Lab Incharges', icon: <Person />, link: '/lab-incharges' },
   { name: 'Messages', icon: <ChatIcon />, link: '/messages' },
+  { name: 'Timepass', icon: <ChatIcon />, link: '/timepass' },
 ]
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '@/Redux/Reducers/authSlice'
@@ -144,7 +146,9 @@ const SideBar = ({ children }) => {
           </ul>
         </div>
       </aside>
-      <div className=" h-full p-4 sm:ml-64">{children}</div>
+      <div className=" h-full p-4 sm:ml-64">
+        {children}
+      </div>
     </div>
   )
 }

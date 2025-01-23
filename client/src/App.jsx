@@ -10,6 +10,8 @@ import Landing from './Pages/Landing/Landing'
 import Labs from './Pages/Labs/Labs'
 import LabIncharge from './Pages/LabIncharge/LabIncharge'
 import Chat from './Pages/Chat/Chat'
+import Timepass from './Pages/Timepass'
+
 
 function App() {
   // const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -79,6 +81,15 @@ function App() {
                 </SideBar>
               }
             />
+            <Route
+              path="/timepass"
+              element={
+                // <SideBar>
+                 <Timepass />
+                // </SideBar>
+              }
+            />
+            
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>

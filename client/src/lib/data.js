@@ -312,6 +312,7 @@ export const classList = [
     ],
   },
 ]
+
 export const eventsList = [
   {
     name: 'Accenture Test',
