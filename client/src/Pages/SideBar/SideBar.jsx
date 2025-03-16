@@ -27,11 +27,11 @@ const SideBarOptions = [
   { name: 'Events', icon: <EventIcon />, link: '/events' },
   { name: 'Lab Incharges', icon: <Person />, link: '/lab-incharges' },
   { name: 'Messages', icon: <ChatIcon />, link: '/messages' },
-  { name: 'Timepass', icon: <ChatIcon />, link: '/timepass' },
+  { name: 'Seminar Halls', icon: <HouseOutlined />, link: '/seminar-halls' },
 ]
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '@/Redux/Reducers/authSlice'
-import { Person } from '@mui/icons-material'
+import { HouseOutlined, Person } from '@mui/icons-material'
 
 const SideBar = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)

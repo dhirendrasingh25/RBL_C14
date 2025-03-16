@@ -10,7 +10,7 @@ import Landing from './Pages/Landing/Landing'
 import Labs from './Pages/Labs/Labs'
 import LabIncharge from './Pages/LabIncharge/LabIncharge'
 import Chat from './Pages/Chat/Chat'
-import Timepass from './Pages/Timepass'
+import HallPage from './Pages/Halls/HallPage'
 
 
 function App() {
@@ -82,11 +82,11 @@ function App() {
               }
             />
             <Route
-              path="/timepass"
+              path="/seminar-halls"
               element={
-                // <SideBar>
-                 <Timepass />
-                // </SideBar>
+                <SideBar>
+                 <HallPage />
+                 </SideBar>
               }
             />
             

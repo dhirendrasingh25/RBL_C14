@@ -317,7 +317,7 @@ export const eventsList = [
   {
     name: 'Accenture Test',
     day: 'Tuesday',
-    date: '2024-09-20', // Changed to YYYY-MM-DD
+    date: '2025-03-20', // Changed to YYYY-MM-DD
     start_time: '10:00 AM',
     end_time: '12:00 PM',
     lab_no: '304',
@@ -341,7 +341,7 @@ export const eventsList = [
   {
     name: 'Higher Studies Workshop',
     day: 'Thursday',
-    date: '2024-06-20', // Changed to YYYY-MM-DD
+    date: '2025-02-20', // Changed to YYYY-MM-DD
     start_time: '10:00 AM',
     end_time: '12:00 PM',
     lab_no: '324',
@@ -353,7 +353,7 @@ export const eventsList = [
   {
     name: 'Cap Gemini Test',
     day: 'Thursday',
-    date: '2025-12-25', // Changed to YYYY-MM-DD
+    date: '2025-03-21', // Changed to YYYY-MM-DD
     start_time: '10:00 AM',
     end_time: '12:00 PM',
     lab_no: '324',
@@ -391,5 +391,51 @@ export const labInchargeList = [
     phone: '1234567890',
     photo: './profilePic.png',
     designation: 'Senior Lab Incharge',
+  },
+]
+
+export const seminarHallsData = [
+  {
+    id: 1,
+    name: 'Auditorium',
+    capacity: 500,
+    location: 'Wing B , Second Floor',
+    facilities: ['Projector', 'Sound System', 'Air Conditioning', 'Stage'],
+    availability: 'Available',
+  },
+  {
+    id: 2,
+    name: 'Seminar Hall 1',
+    capacity: 220,
+    location: 'Wing C, Fifth Floor',
+    facilities: ['Projector', 'Video Conferencing', 'Air Conditioning'],
+
+    availability: 'Maintenance',
+  },
+  {
+    id: 3,
+    name: 'Seminar Hall 2',
+    capacity: 150,
+    location: 'Wing A, Fourth Floor',
+    facilities: ['Projector', 'Video Conferencing', 'Air Conditioning'],
+    availability: 'Booked',
+  },
+  {
+    id: 4,
+    name: 'Seminar Hall 3',
+    capacity: 80,
+    location: 'Wing B, Fourth Floor',
+    facilities: ['Projector', 'Whiteboard', 'Air Conditioning'],
+
+    availability: 'Available',
+  },
+  {
+    id: 5,
+    name: 'Seminar Hall 4',
+    capacity: 200,
+    location: 'Wing C, Fourth Floor',
+    facilities: ['Projector', 'Sound System', 'Air Conditioning'],
+
+    availability: 'Available',
   },
 ]
